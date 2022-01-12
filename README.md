@@ -10,7 +10,7 @@
 
 # Application
     - The following images display the webpage in use. You can also click the link below to view the application in the browser. 
-    (# input link here)
+    (# input link here--->)
 
 (Input images )
     ![alt text](Images/Demo1.png)
