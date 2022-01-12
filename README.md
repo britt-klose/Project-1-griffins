@@ -1,5 +1,6 @@
 # Project-1-griffins
 
 Server-side API's:
-- git commit
-git 
+- Booking.com
+- https://rapidapi.com/sharemap-sharemap-default/api/travel-places/
+
