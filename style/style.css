@@ -5,12 +5,14 @@ body {
   }
 
 .container {
-    margin: 0 0;
+    margin: 0;
     max-width: 100%;
 }
 
 .is-fluid {
     height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .column {
@@ -40,13 +42,13 @@ body {
 #featured {
     display: flex;
     flex-direction: row;
-    height: 20%;
+    height: auto;
 }
 
 #searchResults {
     display: flex;
     flex-direction: row;
-    height: 20%;
+    height: auto;
 }
 
 .card {
