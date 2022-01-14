@@ -22,7 +22,7 @@ When a user picks a category then the browser uses the 2nd API to show listings 
 
 # Deployed Tools
     - CSS
-    - (CSS tool that's not bootstrap)
+    - (Bulma)
     - HTML
     - Java Script
     - J Query

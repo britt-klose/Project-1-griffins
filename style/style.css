@@ -48,3 +48,18 @@ height: 20%;
 #searchResults {
 
 }
+.headfordropdown{
+    font-weight: bold;
+    margin-top: 10%;
+    font-size: large;
+    margin-left: 8%;
+}
+
+.dropdown{
+    margin-top: 15px;
+    margin-left: 8%;
+    margin-bottom: 50px
+}
+.tabs{
+    margin-left: 5%;
+}
