@@ -23,7 +23,7 @@ body {
 }
   
 .right {
-    width: 70%;
+    width: 80%;
     height: 100%;
     margin: 5px;
     display: flex;
@@ -37,14 +37,20 @@ body {
     border-radius: 5px;
 }
 
-.card {
-    margin: 20px 0;
-}
-
 #featured {
-height: 20%;
+    display: flex;
+    flex-direction: row;
+    height: 20%;
 }
 
 #searchResults {
+    display: flex;
+    flex-direction: row;
+    height: 20%;
+}
 
+.card {
+    /* display: inline; */
+    max-width: 250px;
+    margin: 10px;
 }
