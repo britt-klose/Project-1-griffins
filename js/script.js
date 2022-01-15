@@ -89,13 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
 //             });
 //     });
 // }
+
 function searchFunc() {
+    console.log(city)
     console.log(search)
-    fetch('https://api.opentripmap.com/0.1/en/places/geoname?name=' + city + '&apikey=' + openTripKey)
+    fetch('https://api.opentripmap.com/0.1/en/places/geoname?name=' + city + '&apikey=' + openTripK)
         .then(data => data.json())
         .then(function (response) {
             console.log(response)
-        })
+       })
 }
 searchBtn.click(searchFunc);
 
