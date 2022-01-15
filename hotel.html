@@ -73,33 +73,41 @@
             <!--Add in picture to the side from carousel-->
         </div>
     </section>
-
-            <h5 class= "headfordropdown">See What's Nearby</h5>
-                <!--Drop down menu for activities-->
-                <div class="dropdown is-active">
-                    <div class="dropdown-trigger">
-                      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                        <span>Activities</span>
-                        <span class="icon is-small">
-                          <i class="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                      </button>
-                    </div>
-                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                      <div class="dropdown-content">
-                        <a href="#" class="dropdown-item">
-                          Restaurants
-                        </a>
-                        <a class="dropdown-item">
-                         Shops
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Museums
-                        </a>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+    <div class="tabs">
+      <ul>
+        <li class="is-active"><a>Overview</a></li>
+        <li><a>Pricing</a></li>
+        <li><a>Ratings</a></li>
+        <li><a>Amenities</a></li>
+        <li><a>Contact</a></li>
+      </ul>
+    </div>
+      <h5 class= "headfordropdown">See What's Nearby</h5>
+        <!--Drop down menu for activities-->
+        <div class="dropdown is-active">
+          <div class="dropdown-trigger">
+            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span>Activities</span>
+                <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+                <a href="#" class="dropdown-item">
+                  Restaurants
+                </a>
+                <a class="dropdown-item">
+                  Shops
+                </a>
+                <a href="#" class="dropdown-item">
+                  Museums
+                </a>
+                </a>
+            </div>
+          </div>
+          </div>
 
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
