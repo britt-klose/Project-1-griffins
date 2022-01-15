@@ -89,15 +89,20 @@ document.addEventListener('DOMContentLoaded', () => {
 //             });
 //     });
 // }
-function searchFunc() {
-    console.log(search)
+var coordinates = function searchFunc() {
+    var city = $('#search').val();
+    console.log(city)
     fetch('https://api.opentripmap.com/0.1/en/places/geoname?name=' + city + '&apikey=' + openTripKey)
         .then(data => data.json())
         .then(function (response) {
             console.log(response)
         })
-}
-searchBtn.click(searchFunc);
+console.log(coordinates.data)}
+
+
+
+searchBtn.click(coordinates);
+
 
 // searchBtn.click("searchBtn", function (event) {
 //     var name = document.getElementByClass("input-group").value;
