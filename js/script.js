@@ -89,21 +89,55 @@ document.addEventListener('DOMContentLoaded', () => {
 //             });
 //     });
 // }
-var coordinates = function searchFunc() {
+
+function searchFunc() {
     var city = $('#search').val();
     console.log(city)
     fetch('https://api.opentripmap.com/0.1/en/places/geoname?name=' + city + '&apikey=' + openTripKey)
-        .then(data => data.json())
-        .then(function (response) {
-            console.log(response)
+        .then(response => response.json())
+        .then(function (data) {
+            console.log(data);
+            objectsList(data);
         })
-console.log(coordinates.data)}
+    }
 
+function objectsList(coordinates) {
 
+        var longitude = coordinates.lon.toString();
+        var latitude = coordinates.lat.toString();
 
-searchBtn.click(coordinates);
+    console.log(latitude)
+    console.log(longitude)
 
+    fetch('https://api.opentripmap.com/0.1/en/places/radius?radius=1600&lon=' + longitude + '&lat=' + latitude + '&kinds=cultural&apikey=' + openTripKey)
+        .then(response => response.json())
+        .then(function(data) {
+            console.log(data);
+            objectProperties(data);
+        })
+}
 
+function objectProperties(destination) {
+
+    function getXid() {
+        for (var i=0; i<destination.features.length; i++) {
+            console.log(destination.features[i].properties.xid)
+
+            var xid = destination.features[i].properties.xid
+
+            fetch('https://api.opentripmap.com/0.1/en/places/xid/' + xid + '?apikey=' + openTripKey)
+                .then(response => response.json())
+                .then(function(data) {
+                    // objectProperties(data);
+                    console.log(data);
+                })
+        }
+    }
+
+    getXid();
+};
+
+searchBtn.click(function () {searchFunc()});
 // searchBtn.click("searchBtn", function (event) {
 //     var name = document.getElementByClass("input-group").value;
 //     console.log(name)
