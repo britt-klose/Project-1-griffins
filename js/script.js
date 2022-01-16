@@ -1,4 +1,4 @@
-var city = $("#search").val();
+
 var searchBtn = $('.searchBtn');
 var featureImage = $('#hotelPic');
 var results = $('#searchResults');
@@ -73,24 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // 	console.error(err);
 // });
 
-// function apiGet(method, query) {
-//     return new Promise(function (resolve, reject) {
-//         var otmAPI =
-//             "https://api.opentripmap.com/0.1/en/places/" + method + "?apikey=" + openTripKey;
-//         if (query !== undefined) {
-//             otmAPI += "&" + query;
-//         }
-//         fetch(otmAPI)
-//             .then(response => response.json())
-//             .then(data => resolve(data))
-//         console.log(data)
-//             .catch(function (err) {
-//                 console.log("Fetch Error :-S", err);
-//             });
-//     });
-// }
-function searchFunc() {
-    console.log(search)
+function searchFunc(city) {
+    var city = $("#search").val();
     fetch('https://api.opentripmap.com/0.1/en/places/geoname?name=' + city + '&apikey=' + openTripKey)
         .then(data => data.json())
         .then(function (response) {
