@@ -8,12 +8,6 @@ var featureInfo = $('#featureInfo');
 var featureRating = $('#featStars');
 var searchResults = $('#searchResults');
 var openTripKey = "5ae2e3f221c38a28845f05b65de00eb741183a537516c87362491f72";
-var bookingKey = "2fd27d63f8msh0f4bac2c647e6d2p1ab48cjsnd297a64b1499";
-var pageLength = 5;
-var lon;
-var lat;
-var offset = 0;
-var count;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Functions to open and close a modal
@@ -59,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
 // fetch("https://booking-com.p.rapidapi.com/v1/hotels/locations?name=" + city + "&locale=en-gb", {
 // 	"method": "GET",
 // 	"headers": {
@@ -92,7 +88,6 @@ function searchFunc(city) {
 //             });
 //     });
 // }
-
 function searchFunc() {
     var city = $('#search').val();
     console.log(city)
@@ -102,35 +97,59 @@ function searchFunc() {
             console.log(data);
             objectsList(data);
         })
-    }
+}
 
 function objectsList(coordinates) {
 
-        var longitude = coordinates.lon.toString();
-        var latitude = coordinates.lat.toString();
+    var longitude = coordinates.lon.toString();
+    var latitude = coordinates.lat.toString();
 
     console.log(latitude)
     console.log(longitude)
 
     fetch('https://api.opentripmap.com/0.1/en/places/radius?radius=1600&lon=' + longitude + '&lat=' + latitude + '&kinds=cultural&apikey=' + openTripKey)
         .then(response => response.json())
-        .then(function(data) {
+        .then(function (data) {
             console.log(data);
             objectProperties(data);
         })
+    fetch("https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates?order_by=popularity&longitude=" + longitude + "&latitude=" + latitude + "&locale=en-us&room_number=1&units=imperial&adults_number=2&filter_by_currency=USD&checkin_date=2022-07-01&checkout_date=2022-07-02", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "booking-com.p.rapidapi.com",
+            "x-rapidapi-key": "2fd27d63f8msh0f4bac2c647e6d2p1ab48cjsnd297a64b1499"
+        }
+    })
+        .then(response => response.json()) 
+        .then(function (data) {
+            console.log(data);
+            for (let i = 1; i < 6; i++) {
+                var hotelName = data.result[i].hotel_name
+                var hotelPrice = "$" + data.result[i].price_breakdown.all_inclusive_price
+                var hotelLoc = data.result[i].address + ", " + data.result[i].city_name_en
+                var hotelRating = data.result[i].review_score + "/10"
+                var hotelPic = data.result[i].max_1440_photo_url
+                $("#hotel" + i).children("div").children(".media-content").children(".title").html(hotelName)
+                $("#hotel" + i).children("div").children(".media-content").children(".subtitle").html(hotelPrice)
+                $("#hotel" + i).children(".content").children("a").html(hotelLoc)
+                $("#hotel" + i).children(".content").children("div").html(hotelRating)
+                $("#hotel" + i).siblings("div").children("figure").children("img").attr("src", hotelPic)
+            }
+        })
+        
 }
 
 function objectProperties(destination) {
 
     function getXid() {
-        for (var i=0; i<destination.features.length; i++) {
+        for (var i = 0; i < destination.features.length; i++) {
             console.log(destination.features[i].properties.xid)
 
             var xid = destination.features[i].properties.xid
 
             fetch('https://api.opentripmap.com/0.1/en/places/xid/' + xid + '?apikey=' + openTripKey)
                 .then(response => response.json())
-                .then(function(data) {
+                .then(function (data) {
                     // objectProperties(data);
                     console.log(data);
                 })
@@ -140,91 +159,4 @@ function objectProperties(destination) {
     getXid();
 };
 
-searchBtn.click(function () {searchFunc()});
-// searchBtn.click("searchBtn", function (event) {
-//     var name = document.getElementByClass("input-group").value;
-//     console.log(name)
-//     apiGet("geoname", "name=" + name).then(function (data) {
-//         let message = "Name not found";
-//         if (data.status == "OK") {
-//             message = data.name + ", " + getCountryName(data.country);
-//             lon = data.lon;
-//             lat = data.lat;
-//             firstLoad();
-//         }
-//         document.getElementById("info").innerHTML = `${message}`;
-//     });
-//     event.preventDefault();
-// });
-
-// function firstLoad() {
-//     apiGet(
-//         "radius",
-//         `radius=1000&limit=${pageLength}&offset=${offset}&lon=${lon}&lat=${lat}&rate=2&format=count`
-//     ).then(function (data) {
-//         count = data.count;
-//         offset = 0;
-//         document.getElementById(
-//             "info"
-//         ).innerHTML += `<p>${count} objects with description in a 1km radius</p>`;
-//         loadList();
-//     });
-// }
-
-// function loadList() {
-//     apiGet(
-//         "radius",
-//         `radius=1000&limit=${pageLength}&offset=${offset}&lon=${lon}&lat=${lat}&rate=2&format=json`
-//     ).then(function (data) {
-//         var list = document.getElementById("list");
-//         list.innerHTML = "";
-//         data.forEach(item => list.appendChild(createListItem(item)));
-//         var nextBtn = document.getElementById("next_button");
-//         if (count < offset + pageLength) {
-//             nextBtn.style.visibility = "hidden";
-//         } else {
-//             nextBtn.style.visibility = "visible";
-//             nextBtn.innerText = `Next (${offset + pageLength} of ${count})`;
-//         }
-//     });
-// }
-
-// function createListItem(item) {
-//     var a = document.createElement("a");
-//     a.className = "list-group-item list-group-item-action";
-//     a.setAttribute("data-id", item.xid);
-//     a.innerHTML = `<h5 class="list-group-item-heading">${item.name}</h5>
-//               <p class="list-group-item-text">${getCategoryName(item.kinds)}</p>`;
-
-//     a.addEventListener("click", function () {
-//         document.querySelectorAll("#list a").forEach(function (item) {
-//             item.classList.remove("active");
-//         });
-//         this.classList.add("active");
-//         let xid = this.getAttribute("data-id");
-//         apiGet("xid/" + xid).then(data => onShowPOI(data));
-//     });
-//     return a;
-// }
-
-// function onShowPOI(data) {
-//     var poi = document.getElementById("poi");
-//     poi.innerHTML = "";
-//     if (data.preview) {
-//         poi.innerHTML += `<img src="${data.preview.source}">`;
-//     }
-//     poi.innerHTML += data.wikipedia_extracts
-//         ? data.wikipedia_extracts.html
-//         : data.info
-//             ? data.info.descr
-//             : "No description";
-
-//     poi.innerHTML += `<p><a target="_blank" href="${data.otm}">Show more at OpenTripMap</a></p>`;
-// }
-
-// document
-//     .getElementById("next_button")
-//     .addEventListener("click", function () {
-//         offset += pageLength;
-//         loadList();
-//     });
+searchBtn.click(function () { searchFunc() });
