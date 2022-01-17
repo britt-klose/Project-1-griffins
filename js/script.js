@@ -1,4 +1,4 @@
-var city = $("#search").val();
+
 var searchBtn = $('.searchBtn');
 var featureImage = $('#hotelPic');
 var results = $('#searchResults');
@@ -73,6 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // 	console.error(err);
 // });
 
+
+function searchFunc(city) {
+    var city = $("#search").val();
 // function apiGet(method, query) {
 //     return new Promise(function (resolve, reject) {
 //         var otmAPI =
