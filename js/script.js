@@ -53,6 +53,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+// fetch("https://booking-com.p.rapidapi.com/v1/hotels/locations?name=" + city + "&locale=en-gb", {
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "booking-com.p.rapidapi.com",
+// 		"x-rapidapi-key": "2fd27d63f8msh0f4bac2c647e6d2p1ab48cjsnd297a64b1499"
+// 	}
+// })
+// .then(response => {
+// 	console.log(response);
+// })
+// .catch(err => {
+// 	console.error(err);
+// });
+
+
+function searchFunc(city) {
+    var city = $("#search").val();
+// function apiGet(method, query) {
+//     return new Promise(function (resolve, reject) {
+//         var otmAPI =
+//             "https://api.opentripmap.com/0.1/en/places/" + method + "?apikey=" + openTripKey;
+//         if (query !== undefined) {
+//             otmAPI += "&" + query;
+//         }
+//         fetch(otmAPI)
+//             .then(response => response.json())
+//             .then(data => resolve(data))
+//         console.log(data)
+//             .catch(function (err) {
+//                 console.log("Fetch Error :-S", err);
+//             });
+//     });
+// }
 function searchFunc() {
     var city = $('#search').val();
     console.log(city)
