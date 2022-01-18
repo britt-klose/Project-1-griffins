@@ -53,41 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
-// fetch("https://booking-com.p.rapidapi.com/v1/hotels/locations?name=" + city + "&locale=en-gb", {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "booking-com.p.rapidapi.com",
-// 		"x-rapidapi-key": "2fd27d63f8msh0f4bac2c647e6d2p1ab48cjsnd297a64b1499"
-// 	}
-// })
-// .then(response => {
-// 	console.log(response);
-// })
-// .catch(err => {
-// 	console.error(err);
-// });
-
-
-function searchFunc(city) {
-    var city = $("#search").val();
-// function apiGet(method, query) {
-//     return new Promise(function (resolve, reject) {
-//         var otmAPI =
-//             "https://api.opentripmap.com/0.1/en/places/" + method + "?apikey=" + openTripKey;
-//         if (query !== undefined) {
-//             otmAPI += "&" + query;
-//         }
-//         fetch(otmAPI)
-//             .then(response => response.json())
-//             .then(data => resolve(data))
-//         console.log(data)
-//             .catch(function (err) {
-//                 console.log("Fetch Error :-S", err);
-//             });
-//     });
-// }
 function searchFunc() {
     var city = $('#search').val();
     console.log(city)
@@ -104,10 +69,7 @@ function objectsList(coordinates) {
     var longitude = coordinates.lon.toString();
     var latitude = coordinates.lat.toString();
 
-    console.log(latitude)
-    console.log(longitude)
-
-    fetch('https://api.opentripmap.com/0.1/en/places/radius?radius=1600&lon=' + longitude + '&lat=' + latitude + '&kinds=cultural&apikey=' + openTripKey)
+    fetch('https://api.opentripmap.com/0.1/en/places/radius?radius=1600&lon=' + longitude + '&lat=' + latitude + '&kinds=cultural&limit=5&apikey=' + openTripKey)
         .then(response => response.json())
         .then(function (data) {
             console.log(data);
@@ -130,28 +92,36 @@ function objectsList(coordinates) {
                 var hotelRating = data.result[i].review_score + "/10"
                 var hotelPic = data.result[i].max_1440_photo_url
                 $("#hotel" + i).children("div").children(".media-content").children(".title").html(hotelName)
-                $("#hotel" + i).children("div").children(".media-content").children(".subtitle").html(hotelPrice)
-                $("#hotel" + i).children(".content").children("a").html(hotelLoc)
+                $("#hotel" + i).children("div").children(".media-content").children(".subtitle").html(hotelPrice + "/night")
+                $("#hotel" + i).children(".content").children("p").html(hotelLoc)
                 $("#hotel" + i).children(".content").children("div").html(hotelRating)
                 $("#hotel" + i).siblings("div").children("figure").children("img").attr("src", hotelPic)
+                localStorage.setItem("hotelName" + [i], hotelName)
+                localStorage.setItem("hotelPrice" + [i], hotelPrice)
+                localStorage.setItem("hotelLoc" + [i], hotelLoc)
+                localStorage.setItem("hotelRating" + [i], hotelRating)
+                localStorage.setItem("hotelPic" + [i], hotelPic)
             }
-        })
-        
+        })   
 }
 
 function objectProperties(destination) {
 
     function getXid() {
         for (var i = 0; i < destination.features.length; i++) {
-            console.log(destination.features[i].properties.xid)
 
             var xid = destination.features[i].properties.xid
+            var activityName = data.result[i].name
+            var activityLoc = data.result[i].address.neighbourhood + ", " + data.result[i].address.city
+
 
             fetch('https://api.opentripmap.com/0.1/en/places/xid/' + xid + '?apikey=' + openTripKey)
                 .then(response => response.json())
                 .then(function (data) {
                     // objectProperties(data);
                     console.log(data);
+                    localStorage.setItem("hotelName" + [i], activityName)
+                    localStorage.setItem("hotelLoc" + [i], activityLoc)
                 })
         }
     }
@@ -160,3 +130,4 @@ function objectProperties(destination) {
 };
 
 searchBtn.click(function () { searchFunc() });
+

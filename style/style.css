@@ -53,19 +53,40 @@ body {
 
 .card {
     /* display: inline; */
-    max-width: 250px;
+    max-width: 17.5%;
     margin: 10px;
+}
+.card-content {
+    padding: 3px;
+}
+.content {
+    position: absolute;
+    bottom: 0;
 }
 .tabs{
     margin-left: 20px;
 }
-.dropdown{
-    margin-left: 20%;
+.details {
+    height: 60%;
+}
+
+.select{
+    position: absolute;
+    bottom: 18%;
+    margin-left: 2%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 .headfordropdown{
-    margin-left: 20%;
-    margin-top: 9%;
+    position: absolute;
+    bottom: 25%;
+    margin-left: 2%;
+    margin-top: 10px;
     font-weight: bold;
+}
+.activities {
+    position: absolute;
+    left: 20%;
+    bottom: 0;
+    width: 80%;
 }
