@@ -53,6 +53,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+var hotelElCards = document.querySelectorAll(".card")
+console.log(hotelElCards)
+for (i=0; i<hotelElCards.length; i++){
+    console.log(hotelElCards[i].children[0])
+    hotelElCards[i].children[0].addEventListener("click", function(event){
+        event.preventDefault();
+        $("#main-page").attr("style", "display:none")
+        $("#single-hotel").attr("style", "display:flex")
+        console.log(event.currentTarget.id)
+        var hotelNum = event.currentTarget.id
+        console.log(localStorage.getItem("hotelName" + hotelNum))
+        $("#new-title").text(localStorage.getItem("hotelName" + hotelNum))
+        $("#new-subT").text(localStorage.getItem("hotelLoc" + hotelNum))
+        
+    })
+}
+
+//event listener for clicking on tabs
+//$("single-overview").text(localStorage.getItem("hotelPrice" + hotelNum))
+//$("single-price").text(localStorage.getItem("hotelPrice" + hotelNum))
+//$("single-price").text(localStorage.getItem("hotelPrice" + hotelNum))
+//$("single-price").text(localStorage.getItem("hotelPrice" + hotelNum))
+//$("single-price").text(localStorage.getItem("hotelPrice" + hotelNum))
+
 function searchFunc() {
     var city = $('#search').val();
     console.log(city)

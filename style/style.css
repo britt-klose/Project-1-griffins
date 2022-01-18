@@ -63,8 +63,14 @@ body {
     position: absolute;
     bottom: 0;
 }
+
+#single-hotel{
+    display: none;
+}
+
 .tabs{
     margin-left: 20px;
+    margin-bottom: 30px;
 }
 .details {
     height: 60%;
@@ -72,16 +78,17 @@ body {
 
 .select{
     position: absolute;
-    bottom: 18%;
+    bottom: 7%;
     margin-left: 2%;
-    margin-top: 10px;
+    margin-top: 90px;
     margin-bottom: 10px;
 }
 .headfordropdown{
     position: absolute;
-    bottom: 25%;
+    text-align: left;
     margin-left: 2%;
-    margin-top: 10px;
+    margin-top: 60px;
+    margin-bottom: 15%;
     font-weight: bold;
 }
 .activities {
@@ -89,4 +96,5 @@ body {
     left: 20%;
     bottom: 0;
     width: 80%;
+    margin-top: 70px;
 }

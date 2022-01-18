@@ -69,14 +69,17 @@
   </header>
   <section class="hero is-medium is-link">
     <div class="hero-body">
-      <p class="title">
+      <p class="title" id="new-title">
         Purple Griffin Travel Planner
       </p>
-      <p class="subtitle">
+      <img id="testingpic">
+      <p class="subtitle" id="new-subT">
         Find Your Destination Today!
       </p>
     </div>
   </section>
+
+  <div id="main-page">
   <div class="container is-fluid">
     <div class="container">
       <!-- Search Container: Left -->
@@ -226,7 +229,7 @@
         <div class="container is-widescreen" id="searchResults">
 
           <div class="card">
-            <a id="hotel hotel1" href="hotel.html">
+            <a id="1" href="hotel.html">
               <div class="card-image">
                 <figure class="image is-square">
                   <img src="./style/Purple Griffin.png" alt="Purple Griffin">
@@ -253,7 +256,7 @@
             </a>
           </div>
           <div class="card">
-            <a id="hotel hotel2" href="hotel.html">
+            <a id="2" href="hotel.html">
               <div class="card-image">
                 <figure class="image is-square">
                   <img src="./style/Purple Griffin.png" alt="Purple Griffin">
@@ -279,7 +282,7 @@
             </a>
           </div>
           <div class="card">
-            <a id="hotel hotel3" href="hotel.html">
+            <a id="3" href="hotel.html">
               <div class="card-image">
                 <figure class="image is-square">
                   <img src="./style/Purple Griffin.png" alt="Purple Griffin">
@@ -305,7 +308,7 @@
             </a>
           </div>
           <div class="card">
-            <a id="hotel hotel4" href="hotel.html">
+            <a id="4" href="hotel.html">
               <div class="card-image">
                 <figure class="image is-square">
                   <img src="./style/Purple Griffin.png" alt="Purple Griffin">
@@ -331,7 +334,7 @@
             </a>
           </div>
           <div class="card">
-            <a id="hotel hotel5" href="hotel.html">
+            <a id="5" href="hotel.html">
               <div class="card-image">
                 <figure class="image is-square">
                   <img src="./style/Purple Griffin.png" alt="Purple Griffin">
@@ -360,6 +363,39 @@
       </div>
     </div>
   </div>
+</div>
+<!--Single Hotel Overview Page-->
+<div id="single-hotel">
+  <h1 id="single-hotel-name"></h1>
+  <div class="tabs">
+    <ul>
+      <li class="is-active"><a>Overview</a></li>
+      <li><a id="single-price">Pricing</a></li>
+      <li><a>Ratings</a></li>
+      <li><a>Amenities</a></li>
+      <li><a>Contact</a></li>
+    </ul>
+  </div>
+  <section class="container hotelDetails">
+    <p class="info" id="overview"></p>
+    <p class="info" id="overview"></p>
+    <p class="info" id="overview"></p>
+    <p class="info" id="overview"></p>
+  </section>
+  
+  <!--Drop down menu for activities-->
+  <h5 class="headfordropdown">See What's Nearby</h5>
+    <div class="select">
+      <select>
+        <option value="restaurants">Restaurants</option>
+        <option value="shops">Shops</option>
+        <option value="museums">Museums</option> 
+      </select>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- Login Modal -->
   <div id="modal-js-example" class="modal">
