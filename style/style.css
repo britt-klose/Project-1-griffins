@@ -78,23 +78,20 @@ body {
 
 .select{
     position: absolute;
-    bottom: 7%;
-    margin-left: 2%;
-    margin-top: 90px;
-    margin-bottom: 10px;
+    top: 30%;
+    right: 5%;
 }
 .headfordropdown{
     position: absolute;
     text-align: left;
-    margin-left: 2%;
     margin-top: 60px;
-    margin-bottom: 15%;
+    top: 20%;
+    right: 5%;
     font-weight: bold;
 }
 .activities {
     position: absolute;
-    left: 20%;
-    bottom: 0;
+    top: 20%;
+    right: 5%;
     width: 80%;
-    margin-top: 70px;
 }
