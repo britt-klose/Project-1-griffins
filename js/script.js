@@ -53,31 +53,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
 var hotelElCards = document.querySelectorAll(".card")
 console.log(hotelElCards)
 for (i=0; i<hotelElCards.length; i++){
-    console.log(hotelElCards[i].children[0])
     hotelElCards[i].children[0].addEventListener("click", function(event){
         event.preventDefault();
         $("#main-page").attr("style", "display:none")
-        $("#single-hotel").attr("style", "display:flex")
+        $("#single-hotel").attr("style", "display:block")
         console.log(event.currentTarget.id)
         var hotelNum = event.currentTarget.id
-        console.log(localStorage.getItem("hotelName" + hotelNum))
-        $("#new-title").text(localStorage.getItem("hotelName" + hotelNum))
-        $("#new-subT").text(localStorage.getItem("hotelLoc" + hotelNum))
-        
+        console.log(sessionStorage.getItem("hotelName" + hotelNum))
+        $("#new-title").text(sessionStorage.getItem("hotelName" + hotelNum))
+        $("#new-subT").text(sessionStorage.getItem("hotelLoc" + hotelNum))
     })
 }
 
-//event listener for clicking on tabs
-//$("single-overview").text(localStorage.getItem("hotelPrice" + hotelNum))
-//$("single-price").text(localStorage.getItem("hotelPrice" + hotelNum))
-//$("single-price").text(localStorage.getItem("hotelPrice" + hotelNum))
-//$("single-price").text(localStorage.getItem("hotelPrice" + hotelNum))
-//$("single-price").text(localStorage.getItem("hotelPrice" + hotelNum))
+// // event listener for clicking on tabs
+// $("single-overview").text(sessionStorage.getItem("hotelPrice" + hotelNum))
+// $("single-price").text(sessionStorage.getItem("hotelPrice" + hotelNum))
+// $("single-price").text(sessionStorage.getItem("hotelPrice" + hotelNum))
+// $("single-price").text(sessionStorage.getItem("hotelPrice" + hotelNum))
+// $("single-price").text(sessionStorage.getItem("hotelPrice" + hotelNum))
 
 function searchFunc() {
     var city = $('#search').val();
@@ -122,11 +118,11 @@ function objectsList(coordinates) {
                 $("#hotel" + i).children(".content").children("p").html(hotelLoc)
                 $("#hotel" + i).children(".content").children("div").html(hotelRating)
                 $("#hotel" + i).siblings("div").children("figure").children("img").attr("src", hotelPic)
-                localStorage.setItem("hotelName" + [i], hotelName)
-                localStorage.setItem("hotelPrice" + [i], hotelPrice)
-                localStorage.setItem("hotelLoc" + [i], hotelLoc)
-                localStorage.setItem("hotelRating" + [i], hotelRating)
-                localStorage.setItem("hotelPic" + [i], hotelPic)
+                sessionStorage.setItem("hotelName" + [i], hotelName)
+                sessionStorage.setItem("hotelPrice" + [i], hotelPrice)
+                sessionStorage.setItem("hotelLoc" + [i], hotelLoc)
+                sessionStorage.setItem("hotelRating" + [i], hotelRating)
+                sessionStorage.setItem("hotelPic" + [i], hotelPic)
             }
         })   
 }
@@ -137,20 +133,19 @@ function objectProperties(destination) {
         for (var i = 0; i < destination.features.length; i++) {
 
             var xid = destination.features[i].properties.xid
-            var activityName = data.result[i].name
-            var activityLoc = data.result[i].address.neighbourhood + ", " + data.result[i].address.city
-
 
             fetch('https://api.opentripmap.com/0.1/en/places/xid/' + xid + '?apikey=' + openTripKey)
                 .then(response => response.json())
                 .then(function (data) {
-                    // objectProperties(data);
                     console.log(data);
-                    localStorage.setItem("hotelName" + [i], activityName)
-                    localStorage.setItem("hotelLoc" + [i], activityLoc)
-                })
-        }
+                    var activityName = data.name
+                    var activityLoc = data.address.neighbourhood + ", " + data.address.city
+                    console.log(activityName);
+                    console.log(activityLoc);
+            }) 
+        } 
     }
+
 
     getXid();
 };
