@@ -76,7 +76,7 @@ body {
     height: 60%;
 }
 
-.select{
+.activity{
     position: absolute;
     top: 30%;
     right: 5%;
@@ -94,4 +94,9 @@ body {
     top: 20%;
     right: 5%;
     width: 80%;
+}
+
+#picture {
+    width: 50%;
+    display: flex;
 }

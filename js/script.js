@@ -1,16 +1,10 @@
-
 var searchBtn = $('.searchBtn');
-var featureImage = $('#hotelPic');
 var results = $('#searchResults');
-var featureHotel = $('#hotelFeature');
-var featurePrice = $('#featPrice');
-var featureInfo = $('#featureInfo');
-var featureRating = $('#featStars');
 var searchResults = $('#searchResults');
 var openTripKey = "5ae2e3f221c38a28845f05b65de00eb741183a537516c87362491f72";
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Functions to open and close a modal
+
     function openModal($el) {
         $el.classList.add('is-active');
     }
@@ -25,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add a click event on buttons to open a specific modal
     (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
         const modal = $trigger.dataset.target;
         const $target = document.getElementById(modal);
@@ -34,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add a click event on various child elements to close the parent modal
     (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
         const $target = $close.closest('.modal');
 
@@ -43,11 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add a keyboard event to close all modals
     document.addEventListener('keydown', (event) => {
         const e = event || window.event;
 
-        if (e.keyCode === 27) { // Escape key
+        if (e.keyCode === 27) { 
             closeAllModals();
         }
     });
@@ -55,8 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 var hotelElCards = document.querySelectorAll(".card")
 console.log(hotelElCards)
-for (i=0; i<hotelElCards.length; i++){
-    hotelElCards[i].children[0].addEventListener("click", function(event){
+for (i = 0; i < hotelElCards.length; i++) {
+    hotelElCards[i].children[0].addEventListener("click", function (event) {
         event.preventDefault();
         $("#main-page").attr("style", "display:none")
         $("#single-hotel").attr("style", "display:block")
@@ -65,6 +56,10 @@ for (i=0; i<hotelElCards.length; i++){
         console.log(sessionStorage.getItem("hotelName" + hotelNum))
         $("#new-title").text(sessionStorage.getItem("hotelName" + hotelNum))
         $("#new-subT").text(sessionStorage.getItem("hotelLoc" + hotelNum))
+        $("#pricing").text(sessionStorage.getItem("hotelPrice" + hotelNum))
+        $("#url").text(sessionStorage.getItem("URL" + hotelNum))
+        $("#picture").attr("src", sessionStorage.getItem("hotelPic" + hotelNum))
+        $("#url").attr("href", sessionStorage.getItem("URL" + hotelNum))
     })
 }
 
@@ -95,7 +90,12 @@ function objectsList(coordinates) {
         .then(response => response.json())
         .then(function (data) {
             console.log(data);
-            objectProperties(data);
+            for (let i = 0; i < 5; i++) {
+                var activityName = data.features[i].properties.name
+                var activityDist = data.features[i].properties.dist.toFixed(2) + " meters"
+                $("#activity" + i).html(activityName)
+                $("#distance" + i).html(activityDist)
+            }     
         })
     fetch("https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates?order_by=popularity&longitude=" + longitude + "&latitude=" + latitude + "&locale=en-us&room_number=1&units=imperial&adults_number=2&filter_by_currency=USD&checkin_date=2022-07-01&checkout_date=2022-07-02", {
         "method": "GET",
@@ -104,7 +104,7 @@ function objectsList(coordinates) {
             "x-rapidapi-key": "2fd27d63f8msh0f4bac2c647e6d2p1ab48cjsnd297a64b1499"
         }
     })
-        .then(response => response.json()) 
+        .then(response => response.json())
         .then(function (data) {
             console.log(data);
             for (let i = 1; i < 6; i++) {
@@ -113,6 +113,7 @@ function objectsList(coordinates) {
                 var hotelLoc = data.result[i].address + ", " + data.result[i].city_name_en
                 var hotelRating = data.result[i].review_score + "/10"
                 var hotelPic = data.result[i].max_1440_photo_url
+                var hotelURL = data.result[i].url
                 $("#hotel" + i).children("div").children(".media-content").children(".title").html(hotelName)
                 $("#hotel" + i).children("div").children(".media-content").children(".subtitle").html(hotelPrice + "/night")
                 $("#hotel" + i).children(".content").children("p").html(hotelLoc)
@@ -123,32 +124,10 @@ function objectsList(coordinates) {
                 sessionStorage.setItem("hotelLoc" + [i], hotelLoc)
                 sessionStorage.setItem("hotelRating" + [i], hotelRating)
                 sessionStorage.setItem("hotelPic" + [i], hotelPic)
+                sessionStorage.setItem("URL" + [i], hotelURL)
             }
-        })   
+        })
 }
 
-function objectProperties(destination) {
-
-    function getXid() {
-        for (var i = 0; i < destination.features.length; i++) {
-
-            var xid = destination.features[i].properties.xid
-
-            fetch('https://api.opentripmap.com/0.1/en/places/xid/' + xid + '?apikey=' + openTripKey)
-                .then(response => response.json())
-                .then(function (data) {
-                    console.log(data);
-                    var activityName = data.name
-                    var activityLoc = data.address.neighbourhood + ", " + data.address.city
-                    console.log(activityName);
-                    console.log(activityLoc);
-            }) 
-        } 
-    }
-
-
-    getXid();
-};
 
 searchBtn.click(function () { searchFunc() });
-
