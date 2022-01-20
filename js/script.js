@@ -1,6 +1,4 @@
 var searchBtn = $('.searchBtn');
-var results = $('#searchResults');
-var searchResults = $('#searchResults');
 var openTripKey = "5ae2e3f221c38a28845f05b65de00eb741183a537516c87362491f72";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
         const $target = $close.closest('.modal');
-
         $close.addEventListener('click', () => {
             closeModal($target);
         });
@@ -37,23 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (event) => {
         const e = event || window.event;
-
-        if (e.keyCode === 27) { 
+        if (e.keyCode === 27) {
             closeAllModals();
         }
     });
 });
 
 var hotelElCards = document.querySelectorAll(".card")
-console.log(hotelElCards)
+
 for (i = 0; i < hotelElCards.length; i++) {
     hotelElCards[i].children[0].addEventListener("click", function (event) {
         event.preventDefault();
         $("#main-page").attr("style", "display:none")
         $("#single-hotel").attr("style", "display:block")
-        console.log(event.currentTarget.id)
         var hotelNum = event.currentTarget.id
-        console.log(sessionStorage.getItem("hotelName" + hotelNum))
         $("#new-title").text(sessionStorage.getItem("hotelName" + hotelNum))
         $("#new-subT").text(sessionStorage.getItem("hotelLoc" + hotelNum))
         $("#pricing").text(sessionStorage.getItem("hotelPrice" + hotelNum))
@@ -62,20 +56,11 @@ for (i = 0; i < hotelElCards.length; i++) {
     })
 }
 
-// // event listener for clicking on tabs
-// $("single-overview").text(sessionStorage.getItem("hotelPrice" + hotelNum))
-// $("single-price").text(sessionStorage.getItem("hotelPrice" + hotelNum))
-// $("single-price").text(sessionStorage.getItem("hotelPrice" + hotelNum))
-// $("single-price").text(sessionStorage.getItem("hotelPrice" + hotelNum))
-// $("single-price").text(sessionStorage.getItem("hotelPrice" + hotelNum))
-
 function searchFunc() {
     var city = $('#search').val();
-    console.log(city)
     fetch('https://api.opentripmap.com/0.1/en/places/geoname?name=' + city + '&apikey=' + openTripKey)
         .then(response => response.json())
         .then(function (data) {
-            console.log(data);
             objectsList(data);
         })
 }
@@ -88,13 +73,12 @@ function objectsList(coordinates) {
     fetch('https://api.opentripmap.com/0.1/en/places/radius?radius=1600&lon=' + longitude + '&lat=' + latitude + '&kinds=cultural&limit=5&apikey=' + openTripKey)
         .then(response => response.json())
         .then(function (data) {
-            console.log(data);
             for (let i = 0; i < 5; i++) {
                 var activityName = data.features[i].properties.name
                 var activityDist = data.features[i].properties.dist.toFixed(2) + " meters"
                 $("#activity" + i).html(activityName)
                 $("#distance" + i).html(activityDist)
-            }     
+            }
         })
     fetch("https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates?order_by=popularity&longitude=" + longitude + "&latitude=" + latitude + "&locale=en-us&room_number=1&units=imperial&adults_number=2&filter_by_currency=USD&checkin_date=2022-07-01&checkout_date=2022-07-02", {
         "method": "GET",
@@ -105,7 +89,6 @@ function objectsList(coordinates) {
     })
         .then(response => response.json())
         .then(function (data) {
-            console.log(data);
             for (let i = 1; i < 6; i++) {
                 var hotelName = data.result[i].hotel_name
                 var hotelPrice = "$" + data.result[i].price_breakdown.all_inclusive_price
@@ -127,6 +110,5 @@ function objectsList(coordinates) {
             }
         })
 }
-
 
 searchBtn.click(function () { searchFunc() });
