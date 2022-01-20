@@ -57,7 +57,6 @@ for (i = 0; i < hotelElCards.length; i++) {
         $("#new-title").text(sessionStorage.getItem("hotelName" + hotelNum))
         $("#new-subT").text(sessionStorage.getItem("hotelLoc" + hotelNum))
         $("#pricing").text(sessionStorage.getItem("hotelPrice" + hotelNum))
-        $("#url").text(sessionStorage.getItem("URL" + hotelNum))
         $("#picture").attr("src", sessionStorage.getItem("hotelPic" + hotelNum))
         $("#url").attr("href", sessionStorage.getItem("URL" + hotelNum))
     })
