@@ -52,8 +52,7 @@ body {
 }
 
 .card {
-    /* display: inline; */
-    max-width: 17.5%;
+    width: 30%;
     margin: 10px;
 }
 .card-content {
