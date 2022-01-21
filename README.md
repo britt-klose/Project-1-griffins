@@ -18,7 +18,7 @@
     - The following images display the webpage in use.
      You can also click the link below to view the application in the browser. 
 
-    https://britt-klose.github.io/Project-1-griffins/index.html 
+https://britt-klose.github.io/Project-1-griffins/index.html 
 
 ![Alt text](./Images/homepage.png)
  
