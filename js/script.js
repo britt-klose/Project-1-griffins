@@ -89,7 +89,7 @@ function objectsList(coordinates) {
     })
         .then(response => response.json())
         .then(function (data) {
-            for (let i = 1; i < 6; i++) {
+            for (let i = 1; i < 7; i++) {
                 var hotelName = data.result[i].hotel_name
                 var hotelPrice = "$" + data.result[i].price_breakdown.all_inclusive_price
                 var hotelLoc = data.result[i].address + ", " + data.result[i].city_name_en
@@ -107,6 +107,7 @@ function objectsList(coordinates) {
                 sessionStorage.setItem("hotelRating" + [i], hotelRating)
                 sessionStorage.setItem("hotelPic" + [i], hotelPic)
                 sessionStorage.setItem("URL" + [i], hotelURL)
+                console.log(hotelName)
             }
         })
 }
