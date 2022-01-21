@@ -15,12 +15,16 @@
 
 
 # Application
-    - The following images display the webpage in use. You can also click the link below to view the application in the browser. 
+    - The following images display the webpage in use.
+     You can also click the link below to view the application in the browser. 
+
     https://britt-klose.github.io/Project-1-griffins/index.html 
 
-    ![alt text](Images/homepage.png)
-    ![alt text](Images/Searching.png)
-    ![alt text](Images/Overview.png)
+![Alt text](./Images/homepage.png)
+ 
+![alt text](./Images/Searching.png)
+
+![alt text](/Images/Overview.png)
 
 
 # Deployed Tools
